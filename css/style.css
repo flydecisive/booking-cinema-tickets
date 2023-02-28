@@ -1,14 +1,59 @@
-.seats__container {
-  display: grid;
-  grid-template-columns: repeat(5, 40px);
-  grid-template-rows: repeat(4, 40px);
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.seats__item {
-  width: 40px;
-  height: 40px;
-  border: 1px solid black;
+.top {
+  background-color: rgba(31, 41, 61, 0.7);
+}
+
+.logo {
+  filter: drop-shadow(0px 4px 16px rgba(255, 128, 54, 0.25));
+}
+
+.container {
+  background-color: #1A2232;
+  height: 100%;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  font-family: "PT Sans Caption", sans-serif;
+}
+
+.center {
+  padding-left: calc(50vw - 650px);
+  padding-right: calc(50vw - 650px);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  row-gap: 25px;
+  padding-top: 30px;
+}
+.content__img {
+  width: 300px;
+  height: 450px;
+  filter: drop-shadow(0px 16px 40px rgba(7, 9, 13, 0.25));
+  border-radius: 12px;
+}
+.content__link {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.content__title {
+  font-size: 14px;
+}
+.content__subtitle {
+  color: #637394;
+}
+.content__item {
+  width: 300px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-flow: column wrap;
+  gap: 10px;
+}
+
+.title {
+  font-size: 48px;
 }/*# sourceMappingURL=style.css.map */
