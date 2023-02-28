@@ -49,13 +49,109 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-class NavBar {
-    
+interface Film {
+    name: string;
+    image: string;
+    genre: string;
 }
 
-class StartPage {
-    
+interface Films {
+    position: {
+        [key: string]: Film;
+    }
 }
+
+const films: Films = {
+    1: {
+        'name': 'ОПЕРАЦИЯ «ФОРТУНА»: ИСКУССТВО ПОБЕЖДАТЬ',
+        'image': 'img/films_img/1.webp',
+        'genre': 'Боевик, комедия',
+    }
+}
+
+// создание верхнего блока
+class Top {
+    constructor (public container: Element) {
+        this.initTop(container);
+    }
+
+    initTop(container: Element): void {
+        const topContainer = document.createElement('div');
+        topContainer.classList.add('top');
+        const topLink = document.createElement('a');
+        topLink.classList.add('top__link');
+        topLink.setAttribute('href', 'index.html');
+        const logo = document.createElement('img');
+        logo.classList.add('logo');
+        logo.src = 'img/logo.png';
+        logo.alt = 'logo';
+        topLink.appendChild(logo);
+        topContainer.appendChild(topLink);
+        container.appendChild(topContainer);
+    }
+}
+
+// Создание info блока
+class Info {
+    constructor (public container: Element) {
+        this.initInfo(container);
+    }
+
+    initInfo(container: Element): void {
+        const info = document.createElement('div');
+        info.classList.add('info');
+        const title = document.createElement('h2');
+        title.classList.add('title');
+        title.textContent = 'Сейчас в кино';
+        const search = document.createElement('div');
+        search.classList.add('search');
+        info.appendChild(title);
+        info.appendChild(search);
+        container.appendChild(info);
+    }
+}
+
+// создание блока content
+class Content {
+    constructor (container: Element) {
+        this.initContent(container);
+    }
+
+    initContent(container: Element): void {
+        const content = document.createElement('div');
+        content.classList.add('content');
+        const contentLink = document.createElement('a');
+        contentLink.classList.add('content__link');
+        contentLink.href = '#';
+        const contentItem = document.createElement('div');
+        contentItem.classList.add('content__item');
+        const contentImg = document.createElement('img');
+        contentImg.classList.add('content__img');
+        contentImg.src = 'img/films_img/1.webp';
+        const contentTitle = document.createElement('h3');
+        contentTitle.classList.add('content__title');
+        contentTitle.textContent = 'ОПЕРАЦИЯ «ФОРТУНА»: ИСКУССТВО ПОБЕЖДАТЬ';
+        const contentSubtitle = document.createElement('h4');
+        contentSubtitle.classList.add('content__subtitle');
+        contentSubtitle.textContent = 'Боевик, комедия';
+        contentLink.appendChild(contentImg);
+        contentLink.appendChild(contentTitle);
+        contentLink.appendChild(contentSubtitle);
+        contentItem.appendChild(contentLink);
+        content.appendChild(contentItem);
+        container.appendChild(content);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.container');
+
+    if (container) {
+        new Top(container);
+        new Info(container);
+        new Content(container);
+    }  
+});
 
 // 1 пиздим названия фильмов, описание и фотки (мб трейлер)
 // 2 сделать мапу (объект с ключами, на ключах висят фильмы) с сеансами
