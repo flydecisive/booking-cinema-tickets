@@ -1,8 +1,12 @@
+"use strict";
+exports.__esModule = true;
+var films_1 = require("./films");
+console.log(films_1.films);
 var Session = /** @class */ (function () {
     function Session(elements) {
         this.elements = elements;
     }
-    // рендер сидячих мест в кинотеатре
+    // рендер мест в кинотеатре
     Session.prototype.renderSeats = function (container) {
         for (var i = 1; i <= 20; i++) {
             var seat = document.createElement('div');
@@ -97,13 +101,6 @@ var Content = /** @class */ (function () {
     Content.prototype.initContent = function (container) {
         var content = document.createElement('div');
         content.classList.add('content');
-        // <a href="" class="content__link">
-        //         <content class="content__item">
-        //             <img src="img/films_img/1.webp" alt="" class="content__img">
-        //             <h3 class="content__title">ОПЕРАЦИЯ «ФОРТУНА»: ИСКУССТВО ПОБЕЖДАТЬ</h3>
-        //             <h4 class="content__subtitle">Боевик, комедия</h4>
-        //         </content>
-        //     </a>
         var contentLink = document.createElement('a');
         contentLink.classList.add('content__link');
         contentLink.href = '#';

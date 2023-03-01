@@ -1,7 +1,10 @@
+import { films } from './films'; 
+console.log(films);
+
 class Session {
     constructor (public elements: NodeListOf<Element> | undefined) {}
 
-    // рендер сидячих мест в кинотеатре
+    // рендер мест в кинотеатре
     renderSeats (container: Element | undefined): void {
         for (let i = 1; i <= 20; i++) {
             const seat = document.createElement('div');
@@ -48,26 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-interface Film {
-    name: string;
-    image: string;
-    genre: string;
-}
-
-interface Films {
-    position: {
-        [key: string]: Film;
-    }
-}
-
-const films: Films = {
-    1: {
-        'name': 'ОПЕРАЦИЯ «ФОРТУНА»: ИСКУССТВО ПОБЕЖДАТЬ',
-        'image': 'img/films_img/1.webp',
-        'genre': 'Боевик, комедия',
-    }
-}
 
 // создание верхнего блока
 class Top {
