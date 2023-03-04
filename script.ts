@@ -1,5 +1,8 @@
 import { films } from './films'; 
-console.log(films);
+import { Film } from './films'; 
+import './css/style.scss';
+import foo from './assets/*.webp';
+import logoImg from './assets/logo.png';
 
 class Session {
     constructor (public elements: NodeListOf<Element> | undefined) {}
@@ -51,6 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.container');
+
+    if (container) {
+        new Top(container);
+        new Info(container);
+        new Content(container, films, 21);
+    }  
+});
 
 // создание верхнего блока
 class Top {
@@ -66,7 +78,7 @@ class Top {
         topLink.setAttribute('href', 'index.html');
         const logo = document.createElement('img');
         logo.classList.add('logo');
-        logo.src = 'img/logo.png';
+        logo.src = logoImg;
         logo.alt = 'logo';
         topLink.appendChild(logo);
         topContainer.appendChild(topLink);
@@ -96,52 +108,53 @@ class Info {
 
 // создание блока content
 class Content {
-    constructor (container: Element) {
-        this.initContent(container);
+    constructor (container: Element, films: Film, numberOfItems: number) {
+        this.initContent(container, films, numberOfItems);
     }
 
-    initContent(container: Element): void {
+    initContent(container: Element, films: Film, numberOfItems: number): void {
         const content = document.createElement('div');
         content.classList.add('content');
-        const contentLink = document.createElement('a');
-        contentLink.classList.add('content__link');
-        contentLink.href = '#';
-        const contentItem = document.createElement('div');
-        contentItem.classList.add('content__item');
-        const contentImg = document.createElement('img');
-        contentImg.classList.add('content__img');
-        contentImg.src = 'img/films_img/1.webp';
-        const contentTitle = document.createElement('h3');
-        contentTitle.classList.add('content__title');
-        contentTitle.textContent = 'ОПЕРАЦИЯ «ФОРТУНА»: ИСКУССТВО ПОБЕЖДАТЬ';
-        const contentSubtitle = document.createElement('h4');
-        contentSubtitle.classList.add('content__subtitle');
-        contentSubtitle.textContent = 'Боевик, комедия';
-        contentLink.appendChild(contentImg);
-        contentLink.appendChild(contentTitle);
-        contentLink.appendChild(contentSubtitle);
-        contentItem.appendChild(contentLink);
-        content.appendChild(contentItem);
-        container.appendChild(content);
+        for (let i = 1; i <= numberOfItems; i++) {
+            const contentLink = document.createElement('a');
+            contentLink.classList.add('content__link');
+            contentLink.href = '#';
+            const contentItem = document.createElement('div');
+            contentItem.classList.add('content__item');
+            const contentImg = document.createElement('img');
+            contentImg.classList.add('content__img');
+            contentImg.src = `${foo[i]}`;
+            const contentTitle = document.createElement('h3');
+            contentTitle.classList.add('content__title');
+            contentTitle.textContent = `${films[i].name}`;
+            const contentSubtitle = document.createElement('h4');
+            contentSubtitle.classList.add('content__subtitle');
+            contentSubtitle.textContent = `${films[i].genre}`;
+            contentLink.appendChild(contentImg);
+            contentLink.appendChild(contentTitle);
+            contentLink.appendChild(contentSubtitle);
+            contentItem.appendChild(contentLink);
+            content.appendChild(contentItem);
+            container.appendChild(content);
+        }
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.container');
+// // 1 пиздим названия фильмов, описание и фотки (мб трейлер)
+// // 2 сделать мапу (объект с ключами, на ключах висят фильмы) с сеансами
+// // написать рандомайзер, который рандомно вставляет фильмы
+// // bootstrap, ts, webpack, rxjs
+// // спиздить дизайн с кинотеатра
+// // есть главная страница, в которой выводится список фильмов
+// // есть страница детализации фильма (выбор даты, время сеанса, стоимость билета)
+// // страница заказа
+// // тестовая оплата 
 
-    if (container) {
-        new Top(container);
-        new Info(container);
-        new Content(container);
-    }  
-});
+// const arr = [1, 2, 3];
 
-// 1 пиздим названия фильмов, описание и фотки (мб трейлер)
-// 2 сделать мапу (объект с ключами, на ключах висят фильмы) с сеансами
-// написать рандомайзер, который рандомно вставляет фильмы
-// bootstrap, ts, webpack, rxjs
-// спиздить дизайн с кинотеатра
-// есть главная страница, в которой выводится список фильмов
-// есть страница детализации фильма (выбор даты, время сеанса, стоимость билета)
-// страница заказа
-// тестовая оплата 
+// const loadImages = (arr: number[]) => {
+//     let result = [];
+//     arr.forEach((el) => {
+//         result = [...result, require(`assets/${el}.webp`)]
+//     })
+// }
