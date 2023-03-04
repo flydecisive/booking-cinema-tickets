@@ -4,56 +4,57 @@ import './css/style.scss';
 import foo from './assets/*.webp';
 import logoImg from './assets/logo.png';
 
-class Session {
-    constructor (public elements: NodeListOf<Element> | undefined) {}
+// class Session {
+//     constructor (public elements: NodeListOf<Element> | undefined) {}
 
-    // рендер мест в кинотеатре
-    renderSeats (container: Element | undefined): void {
-        for (let i = 1; i <= 20; i++) {
-            const seat = document.createElement('div');
-            seat.classList.add('seats__item');
-            seat.textContent = String(i);
-            container?.appendChild(seat);
-        }
-    }
+//     // рендер мест в кинотеатре
+//     renderSeats (container: Element | undefined): void {
+//         for (let i = 1; i <= 20; i++) {
+//             const seat = document.createElement('div');
+//             seat.classList.add('seats__item');
+//             seat.textContent = String(i);
+//             container?.appendChild(seat);
+//         }
+//     }
 
-    //рендер кнопок   
-    renderButtons (container: Element | null): void {
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.classList.add('buttons__container');
-        const backButton = document.createElement('button');
-        backButton.classList.add('back__button', 'button');
-        backButton.textContent = 'Назад';
-        const bookButton = document.createElement('button');
-        bookButton.classList.add('book__button', 'button');
-        bookButton.textContent = 'Забранировать';
-        buttonsContainer.appendChild(backButton);
-        buttonsContainer.appendChild(bookButton);
-        container?.appendChild(buttonsContainer);
-    }
-}
+//     //рендер кнопок   
+//     renderButtons (container: Element | null): void {
+//         const buttonsContainer = document.createElement('div');
+//         buttonsContainer.classList.add('buttons__container');
+//         const backButton = document.createElement('button');
+//         backButton.classList.add('back__button', 'button');
+//         backButton.textContent = 'Назад';
+//         const bookButton = document.createElement('button');
+//         bookButton.classList.add('book__button', 'button');
+//         bookButton.textContent = 'Забранировать';
+//         buttonsContainer.appendChild(backButton);
+//         buttonsContainer.appendChild(bookButton);
+//         container?.appendChild(buttonsContainer);
+//     }
+// }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.container');
-    const sessionContainer = container?.querySelector('.session__container');
-    const sessionItems = sessionContainer?.querySelectorAll('.session__item'); 
+// document.addEventListener('DOMContentLoaded', () => {
+//     const container = document.querySelector('.container');
+//     const sessionContainer = container?.querySelector('.session__container');
+//     const sessionItems = sessionContainer?.querySelectorAll('.session__item'); 
 
-    const session = new Session(sessionItems);
-    if (sessionItems) {
-        sessionItems.forEach((item) => {
-            item.addEventListener('click', () => {
-                const seatsContainer = document.createElement('div');
-                seatsContainer.classList.add('seats__container');
-                if (container) {
-                    container.innerHTML = '';
-                    container.appendChild(seatsContainer);
-                }
-                session.renderSeats(seatsContainer);
-                session.renderButtons(container);
-            });
-        });
-    }
-});
+//     const session = new Session(sessionItems);
+//     if (sessionItems) {
+//         sessionItems.forEach((item) => {
+//             item.addEventListener('click', () => {
+//                 const seatsContainer = document.createElement('div');
+//                 seatsContainer.classList.add('seats__container');
+//                 if (container) {
+//                     container.innerHTML = '';
+//                     container.appendChild(seatsContainer);
+//                 }
+//                 session.renderSeats(seatsContainer);
+//                 session.renderButtons(container);
+//             });
+//         });
+//     }
+// });
+
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.container');
 
@@ -61,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         new Top(container);
         new Info(container);
         new Content(container, films, 21);
+        new FilmRaiting();
     }  
 });
 
@@ -140,6 +142,27 @@ class Content {
     }
 }
 
+// создание рейтинга фильма для стартовой страницы
+class FilmRaiting {
+    constructor () {
+        const contentItems = document.querySelectorAll('.content__item');
+        contentItems.forEach((contentItem) => {
+            this.initRaiting(contentItem);
+        });
+    }
+    initRaiting(contentItem: Element): void {
+        const contentItemRaiting = document.createElement('div');
+        contentItemRaiting.classList.add('content__item-raiting');
+        const basePart = Math.floor(Math.random() * 8  + 3);
+        if (basePart !== 10) {
+            contentItemRaiting.textContent = `${basePart}.${Math.floor(Math.random() * 10)}`;
+        } else {
+            contentItemRaiting.textContent = `${basePart}`;
+        }
+        contentItem.appendChild(contentItemRaiting);
+    }
+}
+
 // // 1 пиздим названия фильмов, описание и фотки (мб трейлер)
 // // 2 сделать мапу (объект с ключами, на ключах висят фильмы) с сеансами
 // // написать рандомайзер, который рандомно вставляет фильмы
@@ -149,12 +172,3 @@ class Content {
 // // есть страница детализации фильма (выбор даты, время сеанса, стоимость билета)
 // // страница заказа
 // // тестовая оплата 
-
-// const arr = [1, 2, 3];
-
-// const loadImages = (arr: number[]) => {
-//     let result = [];
-//     arr.forEach((el) => {
-//         result = [...result, require(`assets/${el}.webp`)]
-//     })
-// }
